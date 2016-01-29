@@ -1,0 +1,10 @@
+___aldiv: CODE, 1269 0 143
+_UART_Read: CODE, 1092 0 6
+_UART_Data_Ready: CODE, 1086 0 6
+_UART_Init: CODE, 1412 0 228
+_main: CODE, 1640 0 408
+__initialization: CODE, 1098 0 5
+_apagatodo: CODE, 1113 0 9
+_serial_isr: CODE, 1122 0 48
+_analizaComando: CODE, 1170 0 99
+Total: 952
