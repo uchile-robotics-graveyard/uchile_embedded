@@ -1,0 +1,20 @@
+Descripción de la carpeta:
+============================
+
+
+datasheets/: datasheets útiles para el proyecto. Notar que no están realmente en ésta
+             carpeta, sino que sólo se hace referencia a ellos. Realmente están en el
+             Dropbox de Bender. (carpeta "./New Face")
+
+
+design/  : datos sobre el diseño de las placas
+
+eagle/   : contiene proyecto para eagle con las placas del nuevas de la cabeza 
+           (excepto la de los leds --> CONSEGUIRLA Y AGREGARLA AL GIT!!)
+
+
+
+MPLABXProjects/: contiene proyecto mplab con el código para la placa principal y
+           y la placa de los servos.
+
+           Además, contiene código de ejemplo para la comunicación i2c y el uso de pwm

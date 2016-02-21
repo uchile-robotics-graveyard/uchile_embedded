@@ -1,0 +1,103 @@
+Consideraciones importantes:
+-------------------------------
+
+El uso de la librería TCP/IP con ethernet EXIGE!:
+- uso de la versión legacy de tal librería (la nueva no implementa ethernet aún)
+- lo que EXIGE el uso del compilador C18 para MPLAB. No confundir con el XC8, que
+  se creó como reemplazo para C18, pero que no es útil para la librería.
+- Se debe programar en windows. Pues Microchip sólo provee C18 para Windows y además,
+  solo ahí están disponibles algunos utilitarios de la librería (TCP Config. Wizard, MPFS ...).
+
+tl;dr(En resumen):
+- Use MPLAB en Windows, con el compilador C18 (se descarga por separado)
+- Descargue la versión legacy de la librería MLA (Microchip Library For Applications)
+
+
+
+Comunicación entre dispositivos:
+----------------------------------
+
+PC---ethernet---Main Board:
+==========================
+
+- Tipo: ethernet
+
+- librería: MLA TCP/IP
+
+- Protocolos/Aplicaciones implementados:
+   -> Servidor HTTP: App. principal de la placa. Permite read/write de parámetros mediante
+        comandos GET del protocolo HTTP.
+        Para más info, conecte la placa y accese a ella con un browser. (http://192.168.0.40)
+
+   -> Servidor ICMP: Servidor para mensages ICMP. 
+        Permite testear conexión:
+        Forma 1: $ ping 192.168.0.40
+        Forma 2: $ bender_test_head-icmp  (esto ejecuta un ping más bonito y ahorra escribir la IP)
+
+- ip: 192.168.0.40 (estática, pero configurable mediane código) 
+   obs: si ya hay algún dispositivo con tal ip en la red, no se podrá establecer la comunicación.
+
+
+
+Main Board --- SPI --- Led Driver Board
+=======================================:
+
+Typo: SPI
+librería: <spi.h>
+
+No implementado aún.
+
+
+Main Board --- I2C --- Servo Driver Board
+=========================================:
+
+Tipo: i2c
+librería: <i2c.h>
+
+
+No implementado aún.
+
+
+
+Control de Servos:
+---------------------------------
+
+Servos deben ser controlados a app. 50 [Hz] (=> period=20[ms]) con pulsos de ancho variable, según el ángulo deseado. El ancho del pulso (duty_cycle) debe ser:
+- ~1.0[ms] para el ángulo mínimo
+- ~1.5[ms] para centrar el servo
+- ~2.0[ms] para el ángulo máximo
+
+centered                     centered                     min
+||||||||||___________________|||||||||||__________________|||||||_____________________
+<-1.5[ms]->                  <-1.5[ms]->                  <-1[ms]->
+<--------- 20 [ms] ---------><--------- 20 [ms] ---------><--------- 20 [ms] --------->
+|                            |                            |
+
+* Enviar pulso cada "period" [ms], cada pulso del ancho requerido.
+
+El proyecto "Servos" tiene un archivo que permite controlar hasta N?? servos con solo escribir en la variable "ang[6]" (ver src del programa). Además, se dejó un template de la comunicación por I2C, aún sin testear.
+
+El proyecto Master tiene un template de la comunicación por i2c para conectarse con la placa de los servos, pero que no ha sido probado.
+
+En la carpeta MPLABXProjects hay otro archivo README con información útil para la comunicación por i2c.
+
+Una vez conectadas la placa central con la de los servos faltaría programar la placa de los LEDs, conectarla con la central y realizar la comunicación por ethernet con el PC central.
+
+
+
+
+Otros
+-----------------------------------
+
+links útiles:
+
+MLA LEGACY WINDOWS: microchip-libraries-for-applications-v2013-06-15-windows-installer.exe
+Compilador C18: http://www.microchip.com/Developmenttools/ProductDetails.aspx?PartNO=SW006011
+
+conf.bits: http://gputils.sourceforge.net/html-help/PIC18F96J60-conf.html
+nmap: http://www.cyberciti.biz/networking/nmap-command-examples-tutorials/
+
+Comandos que podrían ser útiles:
+- $ nmap
+- $ nmap 192.168.1.0/24   (escaneo de todo ese rango de ip's)
+- $ ifconfig

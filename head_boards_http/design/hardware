@@ -1,0 +1,151 @@
+
+Board Descriptions:
+-------------------
+
+- B_MAIN : Main Board
+- B_SERVO: Servo Driver Board
+- B_ETHER: Ethernet Board
+- B_LEDS : Led Driver Board
+
+- BX : button number X
+- _o : headers for Pickit3
+- >o : header no. 1 for Pickit3
+- |R|: Voltage regulator (4.x-32[V] --> 3.3[V])
+- |C|: Cristal (25MHz)
+- Vin: Input Voltage Pins
+
+
+           MAIN BOARD
+           ==========                                        
+
+       B_SERVO
+        ||||            B_ETHER         
+ - - - -||||- - - - - ||||||||||- 
+|       ||||          |||||||||| |
+|  B1                            |
+|  B2    |-|                     |
+|  B3    |C|                     |
+|  B4    |-|                     |
+|              51        75      |
+|_o             ----------       |
+|_o          50|	      |76    |
+|_o            |          |      |
+|_o            |          |      |
+|_o          26|         o|100   |
+|>o             ----------    ====
+|               25       1    ====
+|     _ _                     ==== B_LEDS
+|    | R |                    ====
+|     ---    1 2 3 4 5 6 7 8  ====   
+|           |o|o|o|o|o|o|o|o|    |
+| -+     B5 |o|o|o|o|o|o|o|o|    |
+| ||        |o|o|o|o|o|o|o|o|    |
+ -||- - - - - - - - - - - - - - -
+  ||                |
+  Vin               i---> o Pin: P1,...,P8
+                          o VDD
+                          o GND
+
+         SERVO DRIVER BOARD
+         ==================
+
+
+PIN Mapping For Main Board
+====================================
+
+- Unkown:
+-----------------------------
+P1,...,P8: (RH2/A18), (RH3/A18), (RE1/AD9/...), (RE0/AD8/...), (RB0/INT0/...), (RB1/INT1), (RB2/INT2), (RB3/INT3/...)
+
+- LED Driver:
+-----------------------------
+  channel   | PIC | con. |    PIC pin        
+   name     | pin | pin  |     name 
+____________|_____|______|_____________________
+  LD_EN_B     94     5       <RE6>/AD14/...
+  LD_GCK      93     7       <RE7>/AD15/...
+  LD_LAT_B    92     9       <RD0>/AD0/...
+  LD_SEL_BK   91     10      <RD1>/AD1/...
+  LD_RST_B    90     8       <RD2>/AD2/...
+  LD_SDO      88     1       <RD4>/AD4/...
+  VDD         86     4       VDD
+  GND         85     2       VSS
+  LD_SCK      84     3       <RD6>/AD6/...
+
+
+- Ethernet Connector:
+-----------------------------
+  channel   | PIC | con. |    PIC pin        
+   name     | pin | pin  |     name 
+____________|_____|______|_____________________
+  LEDA        35     2       RA0/<LEDA>/...
+  LEDB        34     10      RA1/<LEDB>/...
+  TPIN-       73     7       TPIN-
+  TPIN+       74     5       TPIN+
+  DVDD        76     6       VDDTx/VDDRx
+  TPOUT-      77     3       TPOUT-
+  TPOUT+      78     1       TPOUT+
+  DGND         -     9       -
+
+
+- Motor Driver Connector:
+-----------------------------
+  channel   | PIC | con. |    PIC pin        
+   name     | pin | pin  |     name 
+____________|_____|______|_____________________
+  DGND         -     1       -
+  DVDD         -     2       -
+  MD_SDA      55     3       RC4/SDI1/<SDA1>
+  MD_SCL      54     4       RC3/SCK1/<SCL1>
+
+
+- Buttons
+-----------------------------
+  Button    |  channel   | PIC |   PIC pin        
+   name     |    name    | pin |    name 
+____________|____________|_____|______________
+Reset Button   MCLR         -     ¬ MCLR
+Button 1       BT1         47     RJ4/...
+Button 2       BT2         48     RJ5/...
+Button 3       BT3         49     RJ0/...
+Button 4       BT3         50     RJ1/...
+
+
+PIN Mapping For Servo Board
+====================================
+
+- Servo pins
+-----------------------------
+  servo    |  PIC |   PIC pin        
+  number   |  pin |    name 
+___________|______|______________
+   s1         63    RE3/ CCP9/COM0/P3C/REF0
+   s2         62    RE4/ CCP8/COM1/P3B
+   s3         61    RE5/ CCP7/COM2/P1C
+   s4         60    RE6/ CCP6/COM3/P1B
+   s5         59    RE7/ECCP2/SEG31/P2A
+   s6         03    RG0/ECCP3/P3A
+   s7         06    RG3/ CCP4/AN17/P3D/C3INB
+   s8         08    RG4/ CCP5/SEG26/RTCC/T7CKI/AN16/P1D/C3INC
+   s9         64    RE2/ CCP10/LCDBIAS3/P2B
+   s10        33    RC2/ECCP1/P1A/SEG13
+
+
+
+
+
+LED DRIVERS
+==========================
+
+PINS:
+------
+SELBK - Select Bank High->1 or Low->0
+LAT_B - When LAT_B converts from H to L, grayscale data in both shift register banks are latched.
+GCK   - Clock input for PWM operation.
+EN_B  - Input terminal of output enable. All outputs are OFF when EN_B is H.
+RST_B - The IC is initialized when RST_B low. There is an internal pull-up on this pin.
+        This pin couldn’t be floating. Before using the IC, it must be reset first. If 
+        each channel is assigned to drive multiple LEDs, IC should be reset before each
+        LED data latch to prevent from flashing.
+
+... más info en el datasheet del LED Driver (DM163.pdf)

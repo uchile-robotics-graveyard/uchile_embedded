@@ -1,0 +1,33 @@
+Dado que los archivos pesan demasiado para el GIT,
+se subieron al DROPBOX del proyecto.
+
+
+Carpeta "hardware/"
+-------------------
+
+ethernet:
+- ethernet-connector-A.pdf
+- ethernet-connector-B.pdf
+- ethernet-fastjack-connector.pdf
+
+LED driver:
+- DM163.pdf
+
+Reg. de voltaje:
+- R-78Bxx-1.0_L.pdf
+
+
+Carpeta "microchip"
+--------------------
+
+TCP/IP library:
+- TCPIP Stack Help.pdf (Todo lo que se necesita saber sobre la librería TCPIP)
+- Microchip TCP-IP.pdf
+
+
+PIC18:
+- PIC18 - config bits.pdf  (info sobre los "configuration bits" para los PIC's de la familia 18)
+- PIC18F87K90 - Family.pdf (datasheet PIC placa servos: 18F66K90)
+- PIC18F97J60 - Family.pdf (datasheet PIC placa principal: 18F96J60)
+- PIC18F97J60 - Programming Specification.pdf (guia para programar esa familia de PICS)
+- PIC18F - Peripheral Library Help Document.pdf (útil para uso de periféricos: i2c, SPI, PWM, serial....)

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>bender-head control</title>
+</head>
+<body>
+
+<h1>bender-head control</h1>
+<h3><a href="http://~config_ip~/control.html">Reload</a></h3>
+
+<h3>Demos</h3>
+<ul>
+<li><a href="http://~config_ip~/control.html?emotion=serious&yaw=0&mouth=off">all default</a> (serious,0,off)</li>
+<li><a href="http://~config_ip~/control.html?emotion=happy">happy only</a> (happy,-,-)</li>
+<li><a href="http://~config_ip~/control.html?yaw=-15">yaw -15[deg] only</a> (-,-15,-)</li>
+<li><a href="http://~config_ip~/control.html?mouth=on">mouth on</a> (-,-,on)</li>
+<li><a href="http://~config_ip~/control.html?mouth=off">mouth off</a> (-,-,off)</li>
+</ul>
+
+<h3>Head state: (TODO: show last actualization time with javascript)</h3>
+<p>variables:</p>
+<ul>
+	<li>emotion: '~emotion~'</li>
+	<li>yaw: '~yaw~'</li>
+	<li>mouth: '~mouth~'</li>
+</ul>
+
+<p>buttons:</p>
+<ul>
+	<li>button 1: ~btn(0)~</li>
+	<li>button 2: ~btn(1)~</li>
+	<li>button 3: ~btn(2)~</li>
+	<li>button 4: ~btn(3)~</li>
+</ul>
+
+<h3>Control commands</h3>
+<p>Send control commands using the HTTP's GET method to the <em>control.html</em> form. e.g: http://~config_ip~/control.html?emotion=serious&yaw=0&mouth=off"</p>
+<p>Key-value constraints:</p>
+<ul>
+	<li>emotion &isin; {serious, happy, happy1, happy2, happy3, sad, sad1, sad2, sad3, angry, angry1, angry2, angry3, surprise, surprised, shame, ashamed, standby, eyebrow, greetings, 1313, ear, yes, no, lost, relaxed, normal, agitated, blink, flirt}</li>
+	<li>yaw &isin; [~yaw_min~ ~yaw_max~] [deg]</li>
+	<li>mouth &isin; {on, off}</li>
+	<li>string values are case insensitive (the same as URLs)</li>
+	<li>'happy', 'sad' and 'angry' values will be read as happy3, sad3 and angry3. </li>
+</ul>
+
+
+
+<h3>server info:</h3>
+<ul>
+	<li>Hostname: ~config_hostname~</li>
+	<li>MAC: ~config_mac~</li>
+	<li>IP: ~config_ip~</li>
+	<li>gateway: ~config_gw~</li>
+	<li>subnet: ~config_subnet~</li>
+	<li>1st dns : ~config_dns1~</li>
+	<li>2nd dns : ~config_dns2~</li>
+	<li>last build: ~builddate~</li>
+	<li>Microchip TCP/IP Stack version: ~version~</li>
+</ul>
+
+
+
+<hr>
+<h1>DEBUG Console:</h1>
+<p>~debug_string~</p>
+
+
+
+</body>
+</html>

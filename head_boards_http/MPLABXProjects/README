@@ -1,0 +1,10 @@
+
+bender_head/: proyecto para MPLAB, con el código de ambas placas.
+
+ejemplos:
+    emociones/: código parcial?? con las emociones implementadas originalmente.
+                usarlo como guía para programar la placa principal
+
+          i2c/: código de ejemplo para comm. i2c
+
+          pwm/: código de ejemplo para uso de pwm
