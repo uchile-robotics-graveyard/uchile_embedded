@@ -1,0 +1,6 @@
+*~
+*.pyc
+bin/
+build/
+msg_gen/
+src/bender_head_arduino
