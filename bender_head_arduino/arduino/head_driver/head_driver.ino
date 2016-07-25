@@ -34,9 +34,9 @@
 #define pin_reset 7
 #define pin_servo0 8
 #define pin_servo1 9
-#define pin_servo2 11
-#define pin_servo3 12
-#define pin_servo4 13
+#define pin_servo2 10
+#define pin_servo3 11
+#define pin_servo4 12
 
 // Pin numbers on Arduino Mega to control the LED devises
 #define data_led_pin1 3
