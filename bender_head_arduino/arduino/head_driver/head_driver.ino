@@ -64,7 +64,7 @@ class HeadDXL: public DeviceDXL
 	numServos_(numServos), // numero de servos
 	//servos_pins_(servos_pins),    // SERVOS pins
 	//servos_(servos),			// Puntero a objeto Servo
-    servo_select_command_(SERVO_SELECT_COMMAND, MMap::Access::RW, 0U, 5U, 0U), // Servo command 1
+    servo_select_command_(SERVO_SELECT_COMMAND, MMap::Access::RW, 0U, 6U, 0U), // Servo command 1
     servo_pos_command_(SERVO_POS_COMMAND, MMap::Access::RW, 0U, 180U, 0U), // Servo command 2
 	led_select_command_(LED_SELECT_COMMAND, MMap::Access::RW, 0U, 254U, 0U), // array LEDs command 1
 	led_color_command_(LED_COLOR_COMMAND, MMap::Access::RW, 0U, 254U, 0U) // array LEDs command 2
@@ -208,6 +208,20 @@ class HeadDXL: public DeviceDXL
 		updateServos(servos);
 		updateLEDs(LEDs);
     }
+    void SetDefaulState(Servo servos[], Adafruit_NeoPixel LEDs[])
+    {
+    	//Default colors
+		uint8_t R_colors_default[32] = {0,0,0,153,153,153,0,0,0,0,153,0,0,0,0,0,0,0,0,153,153,153,0,0,0,0,153,0,0,0,0,0};
+		uint8_t G_colors_default[32] = {0,0,0,0,0,0,0,0,0,0,0,0,153,153,153,153,0,0,0,0,0,0,0,0,0,0,0,0,153,153,153,153};
+		uint8_t B_colors_default[32] = {153,153,153,0,0,0,0,0,0,153,0,153,0,0,0,0,153,153,153,0,0,0,0,0,0,153,0,153,0,0,0,0};
+		
+    	moveServoTo(&servos[0], 50);
+		moveServoTo(&servos[1], 120);
+		moveServoTo(&servos[2], 100);
+		moveServoTo(&servos[3], 120);
+		moveServoTo(&servos[4], 100);
+		setPixelsTo(&LEDs[0], &LEDs[1], R_colors_default, G_colors_default, B_colors_default, 16); //show colors in LEDs
+    }
 
     inline bool onReset()
     {
@@ -285,6 +299,7 @@ void setup() {
   serialDxl.init(115200, &Serial3 , &head_dxl);
 
   head_dxl.init(servos_pins, servos, LEDs);
+  head_dxl.SetDefaulState(servos, LEDs);
   head_dxl.reset();
   head_dxl.mmap_.serialize();
 }

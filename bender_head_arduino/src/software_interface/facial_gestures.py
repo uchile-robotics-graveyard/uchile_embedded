@@ -4,19 +4,29 @@ import time
 
 # NON ROS HARDWARE INTERFACE
 
+"""The FacialGestures class define the position of each servo for an specific emotion defined as a method of the class.
+It does so using the methods of ServosHW class, which receive percentages to move the actuators (servos).
+Modify to create new emotions based on actuators states."""
+
+"""
+Method Parameters:
+lifting_percentage: Valid for methods 'left_ear, right_ear, left_eyebrow, right_eyebrow'. A number between 0 and 100.
+opening_percentage: Valid for method 'mouth'
+"""
+
 # Use HW controllers
 from head_hw_controller import HeadHWController
 from servos_hw import ServosHW
 
-class FacialGestures(object, servos_hw):
-	def __init__(self):
+class FacialGestures(object):
+	def __init__(self, servos_hw):
 		self.servos_hw = servos_hw
 
 	def surprised(self):
 		self.servos_hw.left_ear(90)
 		self.servos_hw.right_ear(90)
-		self.servos_hw.left_eyebrow(60)
-		self.servos_hw.right_eyebrow(70)
+		self.servos_hw.left_eyebrow(82)
+		self.servos_hw.right_eyebrow(55)
 		self.servos_hw.mouth(90)
 
 	def angry(self):
@@ -30,7 +40,7 @@ class FacialGestures(object, servos_hw):
 		self.servos_hw.left_ear(70)
 		self.servos_hw.right_ear(70)
 		self.servos_hw.left_eyebrow(70)
-		self.servos_hw.right_eyebrow(70)
+		self.servos_hw.right_eyebrow(65)
 		self.servos_hw.mouth(20)
 
 	def sad(self):
@@ -39,6 +49,28 @@ class FacialGestures(object, servos_hw):
 		self.servos_hw.left_eyebrow(90)
 		self.servos_hw.right_eyebrow(90)
 		self.servos_hw.mouth(0)
+		
+	def veryHappy(self):		
+		self.servos_hw.left_eyebrow(70)
+		self.servos_hw.right_eyebrow(70)
+		self.servos_hw.mouth(20)
+		self.servos_hw.left_ear(40)
+		self.servos_hw.right_ear(40)
+		time.sleep(0.2)
+		self.servos_hw.left_ear(20)
+		self.servos_hw.right_ear(20)
+		time.sleep(0.2)
+		self.servos_hw.left_ear(60)
+		self.servos_hw.right_ear(60)
+		time.sleep(0.2)
+		self.servos_hw.left_ear(30)
+		self.servos_hw.right_ear(30)
+		time.sleep(0.2)
+		self.servos_hw.left_ear(50)
+		self.servos_hw.right_ear(50)
+		time.sleep(0.2)
+		self.servos_hw.left_ear(40)
+		self.servos_hw.right_ear(40)
 		
 	def default(self):
 		self.servos_hw.left_ear(100)
@@ -56,12 +88,12 @@ if __name__ == '__main__':
 	facial_gestures = FacialGestures(servos_hw)
 	while True:
 		facial_gestures.surprised()
-		sleep(2)
+		time.sleep(2)
 		facial_gestures.angry()
-		sleep(2)
+		time.sleep(2)
 		facial_gestures.happy()
-		sleep(2)
+		time.sleep(2)
 		facial_gestures.sad()
-		sleep(2)
+		time.sleep(2)
 		facial_gestures.default()
-		sleep(2)
+		time.sleep(2)

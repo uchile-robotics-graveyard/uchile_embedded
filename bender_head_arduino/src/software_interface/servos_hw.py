@@ -5,11 +5,15 @@ from dynamixel_io import DynamixelIO
 
 # NON ROS HARDWARE INTERFACE
 
+"""The ServosHW class allows to actuate the organs (servos) by a percentage, without the need to know the physical restrictions.
+It use the intermediate level methods defined in HeadHWController class.
+IMPORTAT: Modify only if you are sure of physical restrictions of the actuators"""
+
 # Use HW controller
 from head_hw_controller import HeadHWController, SERVO0, SERVO1, SERVO2, SERVO3, SERVO4
 
-class ServosHW(object, hw_controller):
-	def __init__(self):
+class ServosHW(object):
+	def __init__(self, hw_controller):
 		self.hw_controller = hw_controller
 
 	def remapRange(self, value, toLow, toHigh):
@@ -19,7 +23,7 @@ class ServosHW(object, hw_controller):
 		new_range = toHigh-toLow
 		old_range = fromHigh - fromLow
 		new_value = (float(new_range)/old_range)*(value-fromLow)+toLow
-		return new_value
+		return int(new_value)
 
 	def left_ear(self, lifting_percentage):
 		angle = self.remapRange(lifting_percentage, 180, 50)
