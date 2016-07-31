@@ -48,6 +48,11 @@ class FacialExpressions(object):
 		self.eye_emotions.color_palette1()
 		self.facial_gestures.default()
 		self.actual_expresion = "default"
+
+	def apagado(self):
+		self.eye_emotions.apagado()
+		self.facial_gestures.default()
+		self.actual_expresion = "apagado"
 		
 	def get_state(self):
 		return self.actual_expresion

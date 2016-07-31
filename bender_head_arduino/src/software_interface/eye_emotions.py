@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import time
+import rgb_colors_names as c
 
 # NON ROS HARDWARE INTERFACE
 
@@ -17,44 +18,27 @@ class EyeEmotion(object):
 		self.hw_controller = hw_controller
 
 	def surprised(self):
-		black = [0,0,0]
-		red = [3,0,0]
-		green = [0,3,0]
-		blue = [0,0,3]
-		rgb_colors = [blue,blue,blue,red,red,red,black,black,black,blue,red,blue,green,green,green,green]
+		rgb_colors = [c.blue,c.blue,c.blue,c.red,c.red,c.red,c.black,c.black,c.black,c.blue,c.red,c.blue,c.green,c.green,c.green,c.green]
 		self.hw_controller.set_eye_colors("left", rgb_colors)
 		self.hw_controller.set_eye_colors("right", rgb_colors)
 
 	def angry(self):
-		black = [0,0,0]
-		red = [3,0,0]
-		green = [0,3,0]
-		blue = [0,0,3]
-		yellow = [3,3,0]
-		rgb_colors = [red,red,red,red,yellow,yellow,black,black,black,red,black,black,green,green,green,green]
+		rgb_colors = [c.red,c.red,c.red,c.red,c.yellow2,c.yellow2,c.black,c.black,c.black,c.red,c.black,c.black,c.green,c.green,c.green,c.green]
 		self.hw_controller.set_eye_colors("left", rgb_colors)
 		self.hw_controller.set_eye_colors("right", rgb_colors)
 		
 	def sad(self):
-		black = [0,0,0]
-		blue = [0,0,3]
-		rgb_colors = [black,black,black,blue,black,blue,black,blue,black,blue,black,blue,black,black,black,black]
+		rgb_colors = [c.black,c.black,c.black,c.blue,c.black,c.blue,c.black,c.blue,c.black,c.blue,c.black,c.blue,c.black,c.black,c.black,c.black]
 		self.hw_controller.set_eye_colors("left", rgb_colors)
 		self.hw_controller.set_eye_colors("right", rgb_colors)
 
 	def happy(self):
-		black = [0,0,0]
-		red = [3,0,0]
-		green = [0,3,0]
-		blue = [0,0,3]
-		yellow = [3,3,0]
-		rgb_colors = [black,black,black,black,yellow,yellow,black,black,black,black,yellow,yellow,yellow,yellow,black,black]
+		rgb_colors = [c.black,c.black,c.black,c.black,c.yellow3,c.yellow3,c.black,c.black,c.black,c.black,c.yellow3,c.yellow3,c.yellow3,c.yellow3,c.black,c.black]
 		self.hw_controller.set_eye_colors("left", rgb_colors)
 		self.hw_controller.set_eye_colors("right", rgb_colors)
 
-	def reset(self):
-		black = [0,0,0]
-		rgb_colors = [black,black,black,black,black,black,black,black,black,black,black,black,black,black,black,black]
+	def apagado(self):
+		rgb_colors = [c.black,c.black,c.black,c.black,c.black,c.black,c.black,c.black,c.black,c.black,c.black,c.black,c.black,c.black,c.black,c.black]
 		self.hw_controller.set_eye_colors("left", rgb_colors)
 		self.hw_controller.set_eye_colors("right", rgb_colors)
 

@@ -13,7 +13,7 @@ import rospy
 sys.path.append('/home/hernan/fuerte_workspace/bender/bender_head_arduino/src')
 from threading import Thread
 
-from std_msgs.msg import Bool, Int16, String
+from std_msgs.msg import Empty
 from bender_head_arduino.msg import ExpressionCommand
 
 # Use HW interface
@@ -51,6 +51,7 @@ class ROSFacialExpressions:
         self.running = True
 		#subscribers
         self.command_sub = rospy.Subscriber(self.controller_namespace + '/expression_command', ExpressionCommand, self.process_command)
+        self.expressionsList_sub = rospy.Subscriber(self.controller_namespace + '/expression_list', Empty, self.list_expressions)
        #publishers
         self.state_pub = rospy.Publisher(self.controller_namespace + '/expression_state', ExpressionCommand)
         Thread(target=self.update_state).start()
@@ -58,6 +59,7 @@ class ROSFacialExpressions:
     def stop(self):
         self.running = False
         self.command_sub.unregister()
+        self.expressionsList_sub.unregister()
         self.state_pub.unregister()
 
     def process_command(self, msg):
@@ -73,6 +75,14 @@ class ROSFacialExpressions:
             self.facial_expressions.veryHappy()
         elif (msg.expression == "default"):
             self.facial_expressions.default()
+        elif (msg.expression == "apagado"):
+            self.facial_expressions.apagado()
+            
+    def list_expressions(self, msg):
+        print "------------------------------------------------------------"
+        print "Expressions Availables:\n"
+        print "surprised\nangry\nhappy\nsad\nveryHappy\ndefault\napagado\n"
+        print "------------------------------------------------------------"
 
     def update_state(self):
         rate = rospy.Rate(self.state_update_rate)
